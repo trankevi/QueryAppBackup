@@ -58,14 +58,12 @@ export default class Server {
                 that.rest.get("/public/.*", restify.serveStatic({
                     directory: __dirname
                 }));
-               
-              
+
+                // serve default page
                 that.rest.get('/:name', restify.serveStatic({
                     directory: __dirname + '/view',
-                    default: 'index.html'        //if cant find content, will just serve this page
+                    default: 'index.html'        
                 }));                             
-
-                // Other endpoints will go here
 
                 // get query interface for UI
                 that.rest.get('/', Server.getQueryInterface);
@@ -88,8 +86,6 @@ export default class Server {
                 });
 
                 that.rest.on('error', function (err: string) {
-                    // catches errors in restify start; unusual syntax due to internal node not using normal exceptions here
-                    //Log.info('Server::start() - restify ERROR: ' + err);
                     reject(err);
                 });
             } catch (err) {
