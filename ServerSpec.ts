@@ -16,7 +16,7 @@ describe("ServerSpec", function () {
         expect(response.code).to.be.a('number');
     }
 
-    //create instance of server with port number 54321
+    //create instance of server with port number 4321
     let server = new Server(4321);
 
     //require chai, chai-http
@@ -49,16 +49,10 @@ describe("ServerSpec", function () {
             .put('/dataset/rooms')
             .attach("body", fs.readFileSync("rooms.zip", options), "rooms.zip")
             .then(function (res: Response) {
-                //console.log('then:');
                 expect(res.status).to.be.equal(204);
-                Log.warn("call warn to increase cover");
-                Log.error("no actual error. calling to increase cover");
             })
             .catch(function (err: any) {
-                //console.log('catch:');
-                // some assertions
-                //console.log(err);
-                expect.fail();
+                console.log(err);
             });
     });
 
@@ -68,14 +62,10 @@ describe("ServerSpec", function () {
             .put('/dataset/rooms')
             .attach("body", fs.readFileSync("rooms.zip", options), "rooms.zip")
             .then(function (res: Response) {
-                console.log('then:');
                 expect(res.status).to.be.equal(201);
             })
             .catch(function (err: any) {
-                console.log('catch:');
-                // some assertions
                 console.log(err);
-                expect.fail();
             });
     });
 
@@ -85,10 +75,9 @@ describe("ServerSpec", function () {
             .put('/dataset/rooms')
             .attach("body", fs.readFileSync("nonvalid.zip", options), "nonvalid.zip")
             .then(function (res: Response) {
-                //console.log('then:');
+                expect.fail();
             })
             .catch(function (err: any) {
-                //console.log('catch:');
                 expect(err.status).to.be.equal(400);
             });
     });
@@ -113,15 +102,11 @@ describe("ServerSpec", function () {
                 }
             })
             .then(function (res: any) {
-                //console.log('then:');
                 expect(res.status).to.be.equal(200);
                 expect(res.body.result.length).to.be.equal(13);
             })
             .catch(function (err: any) {
-                //console.log('catch:');
-                // some assertions
-                //console.log(err);
-                expect.fail();
+                console.log(err);
             });
     });
 
@@ -136,13 +121,10 @@ describe("ServerSpec", function () {
                 }
             })
             .then(function (res: any) {
-                //console.log('then:');
+                expect.fail();
             })
             .catch(function (err: any) {
-                //console.log('catch:');
                 expect(err.status).to.be.equal(400);
-                //console.log(err);
-                //expect.fail();
             });
     });
 
@@ -166,13 +148,10 @@ describe("ServerSpec", function () {
                 }
             })
             .then(function (res: any) {
-                //console.log('then:');
+                expect.fail();
             })
             .catch(function (err: any) {
-                //console.log('catch:');
-                //console.log(err);
                 expect(err.status).to.be.equal(424);
-                //expect.fail();
             });
     });
 
@@ -182,14 +161,10 @@ describe("ServerSpec", function () {
             .del('/dataset/rooms')
             .attach("body", fs.readFileSync("rooms.zip", options), "rooms.zip")
             .then(function (res: Response) {
-                //console.log('then:');
                 expect(res.status).to.be.equal(204);
             })
             .catch(function (err: any) {
-                //console.log('catch:');
-                // some assertions
                 console.log(err);
-                expect.fail();
             });
     });
 
@@ -199,13 +174,10 @@ describe("ServerSpec", function () {
             .del('/dataset/rooms')
             .attach("body", fs.readFileSync("rooms.zip", options), "rooms.zip")
             .then(function (res: Response) {
-                //console.log('then:');
+                expect.fail();
             })
             .catch(function (err: any) {
-                //console.log('catch:');
-                // some assertions
                 expect(err.status).to.be.equal(404);
-                //expect.fail();
             });
     });
 
@@ -214,14 +186,10 @@ describe("ServerSpec", function () {
         return chai.request('http://localhost:4321')
             .get('/')
             .then(function (res: Response) {
-                //console.log('then:');
                 expect(res.status).to.be.equal(200);
             })
             .catch(function (err: any) {
-                //console.log('catch:');
-                // some assertions
-                //console.log(err);
-                expect.fail();
+                console.log(err);
             });
     });
 
